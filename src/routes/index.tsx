@@ -185,6 +185,30 @@ function Home() {
         </ul>
       </section>
 
+      {/* BUILDING PHOTOS */}
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <Reveal>
+          <h2 className="text-2xl font-extrabold sm:text-3xl">Building photographs</h2>
+          <span className="gold-rule mt-4 block" />
+        </Reveal>
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {GALLERY.map((g, i) => (
+            <Reveal as="li" key={g.src} delay={i * 80}>
+              <figure className="card-lift overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  loading="lazy"
+                  className="aspect-4/3 w-full object-cover"
+                />
+              </figure>
+            </Reveal>
+          ))}
+        </ul>
+      </section>
+
+
+
       {/* ABOUT + MAP */}
       <section className="bg-sky py-20">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2">
