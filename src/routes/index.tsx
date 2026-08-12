@@ -50,25 +50,30 @@ function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-deep pb-20 pt-36 sm:pt-44">
+      <section className="relative overflow-hidden pb-24 pt-40 sm:pt-52">
+        <img
+          src={heroAsset.url}
+          alt="Exterior of Trade Square, the glass-facade commercial building at Saki Naka, Mumbai, with its TRADE SQUARE entrance signage"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
         <div
           aria-hidden="true"
-          className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold/10 blur-3xl"
+          className="absolute inset-0 bg-[linear-gradient(105deg,oklch(0.2_0.06_253/0.88)_0%,oklch(0.2_0.06_253/0.62)_48%,oklch(0.2_0.06_253/0.18)_100%)]"
         />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr]">
-          <div>
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="max-w-2xl">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5 text-xs font-bold tracking-wider text-gold">
+              <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/15 px-4 py-1.5 text-xs font-bold tracking-wider text-gold backdrop-blur-sm">
                 <Award size={14} /> OCCUPANCY CERTIFICATE RECEIVED
               </span>
             </Reveal>
             <Reveal delay={120}>
-              <h1 className="mt-6 font-display text-5xl font-extrabold text-white sm:text-7xl">
+              <h1 className="mt-6 font-display text-5xl font-extrabold text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-7xl">
                 Trade Square
               </h1>
             </Reveal>
             <Reveal delay={240}>
-              <p className="mt-5 max-w-xl text-lg text-white/85 sm:text-xl">
+              <p className="mt-5 max-w-xl text-lg text-white/90 drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] sm:text-xl">
                 Together We Grow — A Landmark Commercial Address in Saki Naka, Mumbai.
               </p>
             </Reveal>
@@ -81,22 +86,9 @@ function Home() {
               </a>
             </Reveal>
           </div>
-
-          <Reveal delay={300}>
-            <div className="grid aspect-4/3 place-items-center rounded-2xl border border-dashed border-white/30 bg-white/5 p-8 text-center">
-              <div>
-                <ImageOff className="mx-auto text-gold" size={28} />
-                <p className="mt-4 text-sm font-bold text-white">
-                  Building photograph — content coming soon
-                </p>
-                <p className="mt-2 text-xs text-white/60">
-                  A verified exterior photo of Trade Square will be published here.
-                </p>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
+
 
       {/* OFFICE INFORMATION */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
