@@ -52,6 +52,15 @@ export function Footer() {
                 {SOCIETY.email}
               </a>
             </li>
+            <li>
+              <a
+                href="mailto:varghese@maraekat.com"
+                className="flex items-start gap-2 break-all transition-colors hover:text-gold"
+              >
+                <Mail size={16} className="mt-0.5 shrink-0 text-gold" />
+                varghese@maraekat.com
+              </a>
+            </li>
           </ul>
         </div>
       </div>
