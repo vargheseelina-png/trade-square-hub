@@ -18,6 +18,8 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  const overHero = pathname === "/" && !scrolled && !open;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -28,7 +30,7 @@ export function Header() {
     >
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6">
         <Link to="/" className="min-w-0" aria-label={`${"Trade Square"} home`}>
-          <Logo />
+          <Logo tone={overHero ? "light" : "deep"} />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
@@ -37,7 +39,11 @@ export function Header() {
               key={item.to}
               to={item.to}
               activeOptions={{ exact: item.to === "/" }}
-              className="rounded-lg px-3.5 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-sky hover:text-primary data-[status=active]:bg-sky data-[status=active]:text-primary"
+              className={`rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors ${
+                overHero
+                  ? "text-white/85 hover:bg-white/10 hover:text-white data-[status=active]:bg-white/15 data-[status=active]:text-white"
+                  : "text-muted-foreground hover:bg-sky hover:text-primary data-[status=active]:bg-sky data-[status=active]:text-primary"
+              }`}
             >
               {item.label}
             </Link>
@@ -45,7 +51,7 @@ export function Header() {
           <Link
             to="/"
             hash="contact"
-            className="ml-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-soft transition-all hover:scale-[1.03] hover:shadow-lift"
+            className={`ml-2 rounded-xl ${overHero ? "bg-white text-primary" : "bg-primary text-primary-foreground"} px-4 py-2 text-sm font-semibold shadow-soft transition-all hover:scale-[1.03] hover:shadow-lift`}
           >
             Contact
           </Link>
@@ -56,7 +62,7 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
-          className="rounded-lg border border-border p-2 text-deep md:hidden"
+          className={`rounded-lg border p-2 md:hidden ${overHero ? "border-white/30 text-white" : "border-border text-deep"}`}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
