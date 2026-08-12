@@ -10,10 +10,24 @@ import {
   Mail,
   Award,
   Navigation,
-  ImageOff,
 } from "lucide-react";
 import { Counter, Reveal } from "@/components/Reveal";
 import { SOCIETY, MANAGER } from "@/lib/society";
+import heroAsset from "@/assets/bldg-3.jpg.asset.json";
+import gal1 from "@/assets/bldg-1.jpg.asset.json";
+import gal2 from "@/assets/bldg-2.jpg.asset.json";
+import gal5 from "@/assets/bldg-5.webp.asset.json";
+import gal6 from "@/assets/bldg-6.jpg.asset.json";
+import gal7 from "@/assets/bldg-7.webp.asset.json";
+
+const GALLERY = [
+  { src: gal7.url, alt: "Trade Square glass facade seen from the entrance driveway, with the TRADE SQUARE signage above the lobby" },
+  { src: gal5.url, alt: "Trade Square compound entrance gate with the stone TRADE SQUARE name wall" },
+  { src: gal1.url, alt: "Upward view of the Trade Square glass facade and its curved metal cornice" },
+  { src: gal6.url, alt: "The main security gate at the Trade Square compound entrance" },
+  { src: gal2.url, alt: "Marble-clad lift lobby inside Trade Square with three elevators" },
+];
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
