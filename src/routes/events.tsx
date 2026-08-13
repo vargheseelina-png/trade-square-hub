@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { CalendarDays, Users, GraduationCap, MapPin, Clock, X, ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { Reveal } from "@/components/Reveal";
+import { supabase } from "@/integrations/supabase/client";
 import a01 from "@/assets/agm-01.jpeg.asset.json";
 import a02 from "@/assets/agm-02.jpeg.asset.json";
 import a03 from "@/assets/agm-03.jpeg.asset.json";
@@ -104,7 +106,30 @@ const GOVERNANCE = [
   },
 ];
 
+type PublicEvent = {
+  id: string;
+  title: string;
+  description: string | null;
+  event_date: string;
+  event_time: string | null;
+  venue: string | null;
+};
+
 function EventsPage() {
+  const upcoming = useQuery({
+    queryKey: ["public-events"],
+    queryFn: async (): Promise<PublicEvent[]> => {
+      const today = new Date().toISOString().slice(0, 10);
+      const { data, error } = await supabase
+        .from("events")
+        .select("id, title, description, event_date, event_time, venue")
+        .eq("is_published", true)
+        .gte("event_date", today)
+        .order("event_date", { ascending: true });
+      if (error) throw error;
+      return data as PublicEvent[];
+    },
+  });
   const [filter, setFilter] = useState<"all" | Category>("all");
   const [index, setIndex] = useState<number | null>(null);
 
@@ -243,13 +268,54 @@ function EventsPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
-          <article className="rounded-2xl border border-dashed border-primary/35 bg-card p-8 text-center">
-            <h2 className="text-xl font-bold">Upcoming Events</h2>
-            <p className="mt-3 text-sm">
-              Details of upcoming events and meetings will be published here soon.
-            </p>
-          </article>
+          <h2 className="text-2xl font-bold">Upcoming Events</h2>
+          <span className="gold-rule mt-4 block" />
         </Reveal>
+
+        {upcoming.isPending && (
+          <p className="mt-6 text-sm text-muted-foreground">Loading events…</p>
+        )}
+
+        {(upcoming.isError || (upcoming.data && upcoming.data.length === 0)) && (
+          <Reveal>
+            <article className="mt-6 rounded-2xl border border-dashed border-primary/35 bg-card p-8 text-center">
+              <p className="text-sm">
+                Details of upcoming events and meetings will be published here soon.
+              </p>
+            </article>
+          </Reveal>
+        )}
+
+        <ul className="mt-8 grid gap-5 md:grid-cols-2">
+          {upcoming.data?.map((ev, i) => (
+            <Reveal as="li" key={ev.id} delay={i * 80}>
+              <article className="card-lift h-full rounded-2xl border border-border bg-card p-7 shadow-soft">
+                <p className="flex items-center gap-2 text-xs font-bold tracking-widest text-primary">
+                  <CalendarDays size={14} />
+                  {new Date(ev.event_date).toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+                <h3 className="mt-3 text-lg font-bold">{ev.title}</h3>
+                {ev.event_time && (
+                  <p className="mt-2 flex items-center gap-2 text-sm">
+                    <Clock size={14} className="shrink-0 text-primary" />
+                    {ev.event_time}
+                  </p>
+                )}
+                {ev.venue && (
+                  <p className="mt-1.5 flex items-start gap-2 text-sm">
+                    <MapPin size={14} className="mt-0.5 shrink-0 text-primary" />
+                    {ev.venue}
+                  </p>
+                )}
+                {ev.description && <p className="mt-3 text-sm">{ev.description}</p>}
+              </article>
+            </Reveal>
+          ))}
+        </ul>
       </section>
 
       {active && (
