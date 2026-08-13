@@ -51,8 +51,15 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const STATS = [
-  { icon: CalendarCheck, label: "Established", value: 2025, plain: true },
+const STATS: {
+  icon: typeof CalendarCheck;
+  label: string;
+  value: string | number;
+  plain?: boolean;
+  suffix?: string;
+  note?: string;
+}[] = [
+  { icon: CalendarCheck, label: "Established", value: SOCIETY.established, plain: true },
   { icon: Layers, label: "Total Floors", value: 7, note: "Ground + 7 floors" },
   { icon: DoorOpen, label: "Office Units", value: 50, suffix: "+" },
 ];
@@ -136,7 +143,11 @@ function Home() {
                   {s.label.toUpperCase()}
                 </p>
                 <p className="mt-1 font-display text-4xl font-extrabold text-deep">
-                  {s.plain ? s.value : <Counter value={s.value} suffix={s.suffix ?? ""} />}
+                  {s.plain ? (
+                    <span className="text-2xl">{s.value}</span>
+                  ) : (
+                    <Counter value={Number(s.value)} suffix={s.suffix ?? ""} />
+                  )}
                 </p>
                 {s.note && <p className="mt-2 text-sm">{s.note}</p>}
               </article>
@@ -217,8 +228,8 @@ function Home() {
             <span className="gold-rule mt-4 block" />
             <p className="mt-6">
               Trade Square is a commercial office building in Saki Naka, Mumbai, owned and governed
-              by its members through Trade Square Premises Cooperative Society Ltd. Established in
-              2025, the building comprises a ground floor plus seven upper floors with 50+ office
+              by its members through Trade Square Premises Cooperative Society Ltd. Established on
+              11th April 2022, the building comprises a ground floor plus seven upper floors with 50+ office
               units, and remains open all seven days of the week. The Society has received the
               Occupancy Certificate for Trade Square Premises — a milestone reflecting the
               collective effort of its members.
