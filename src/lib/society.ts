@@ -7,7 +7,7 @@ export const SOCIETY = {
   phone: "+91 98201 40676",
   phoneHref: "+919820140676",
   email: "manager.tradesquaresociety@gmail.com",
-  established: 2025,
+  established: "11 April 2022",
   floors: 7,
   units: 50,
   mapsQuery:

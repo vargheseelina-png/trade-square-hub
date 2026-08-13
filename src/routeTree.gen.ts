@@ -10,13 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CommitteeRouteImport } from './routes/committee'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as PaymentsRouteImport } from './routes/payments'
+import { Route as AuthenticatedAdminEventsRouteImport } from './routes/_authenticated/admin.events'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommitteeRoute = CommitteeRouteImport.update({
@@ -34,36 +46,60 @@ const PaymentsRoute = PaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminEventsRoute =
+  AuthenticatedAdminEventsRouteImport.update({
+    id: '/admin/events',
+    path: '/admin/events',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/committee': typeof CommitteeRoute
   '/events': typeof EventsRoute
   '/payments': typeof PaymentsRoute
+  '/admin/events': typeof AuthenticatedAdminEventsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/committee': typeof CommitteeRoute
   '/events': typeof EventsRoute
   '/payments': typeof PaymentsRoute
+  '/admin/events': typeof AuthenticatedAdminEventsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/committee': typeof CommitteeRoute
   '/events': typeof EventsRoute
   '/payments': typeof PaymentsRoute
+  '/_authenticated/admin/events': typeof AuthenticatedAdminEventsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/committee' | '/events' | '/payments'
+  fullPaths:
+    '/' | '/auth' | '/committee' | '/events' | '/payments' | '/admin/events'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/committee' | '/events' | '/payments'
-  id: '__root__' | '/' | '/committee' | '/events' | '/payments'
+  to: '/' | '/auth' | '/committee' | '/events' | '/payments' | '/admin/events'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/committee'
+    | '/events'
+    | '/payments'
+    | '/_authenticated/admin/events'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   CommitteeRoute: typeof CommitteeRoute
   EventsRoute: typeof EventsRoute
   PaymentsRoute: typeof PaymentsRoute
@@ -76,6 +112,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/committee': {
@@ -99,11 +149,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/events': {
+      id: '/_authenticated/admin/events'
+      path: '/admin/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AuthenticatedAdminEventsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminEventsRoute: typeof AuthenticatedAdminEventsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminEventsRoute: AuthenticatedAdminEventsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   CommitteeRoute: CommitteeRoute,
   EventsRoute: EventsRoute,
   PaymentsRoute: PaymentsRoute,
