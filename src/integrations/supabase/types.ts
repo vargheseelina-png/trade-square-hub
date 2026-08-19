@@ -14,39 +14,294 @@ export type Database = {
   }
   public: {
     Tables: {
-      events: {
+      committee_members: {
         Row: {
           created_at: string
+          display_order: number
+          email: string | null
+          id: string
+          is_published: boolean
+          is_signatory: boolean
+          name: string
+          photo_url: string | null
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          is_published?: boolean
+          is_signatory?: boolean
+          name: string
+          photo_url?: string | null
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          email?: string | null
+          id?: string
+          is_published?: boolean
+          is_signatory?: boolean
+          name?: string
+          photo_url?: string | null
+          role?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          caption: string | null
+          category: string
+          created_at: string
           description: string | null
+          display_order: number
           event_date: string
           event_time: string | null
           id: string
           is_published: boolean
+          photos: Json
           title: string
           updated_at: string
           venue: string | null
         }
         Insert: {
+          caption?: string | null
+          category?: string
           created_at?: string
           description?: string | null
+          display_order?: number
           event_date: string
           event_time?: string | null
           id?: string
           is_published?: boolean
+          photos?: Json
           title: string
           updated_at?: string
           venue?: string | null
         }
         Update: {
+          caption?: string | null
+          category?: string
           created_at?: string
           description?: string | null
+          display_order?: number
           event_date?: string
           event_time?: string | null
           id?: string
           is_published?: boolean
+          photos?: Json
           title?: string
           updated_at?: string
           venue?: string | null
+        }
+        Relationships: []
+      }
+      gallery_photos: {
+        Row: {
+          album: string
+          caption: string | null
+          created_at: string
+          display_order: number
+          featured_on_home: boolean
+          id: string
+          image_url: string
+          is_published: boolean
+          updated_at: string
+        }
+        Insert: {
+          album?: string
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          featured_on_home?: boolean
+          id?: string
+          image_url: string
+          is_published?: boolean
+          updated_at?: string
+        }
+        Update: {
+          album?: string
+          caption?: string | null
+          created_at?: string
+          display_order?: number
+          featured_on_home?: boolean
+          id?: string
+          image_url?: string
+          is_published?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notices: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_name: string | null
+          file_url: string | null
+          id: string
+          is_published: boolean
+          notice_date: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          notice_date: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          notice_date?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      office_info: {
+        Row: {
+          about: string
+          address: string
+          building_name: string
+          email: string
+          established: string
+          full_name: string
+          id: string
+          is_published: boolean
+          phone: string
+          total_floors: string
+          total_units: string
+          updated_at: string
+          working_days: string
+          working_hours: string
+        }
+        Insert: {
+          about: string
+          address: string
+          building_name: string
+          email: string
+          established: string
+          full_name: string
+          id?: string
+          is_published?: boolean
+          phone: string
+          total_floors: string
+          total_units: string
+          updated_at?: string
+          working_days: string
+          working_hours: string
+        }
+        Update: {
+          about?: string
+          address?: string
+          building_name?: string
+          email?: string
+          established?: string
+          full_name?: string
+          id?: string
+          is_published?: boolean
+          phone?: string
+          total_floors?: string
+          total_units?: string
+          updated_at?: string
+          working_days?: string
+          working_hours?: string
+        }
+        Relationships: []
+      }
+      payments_info: {
+        Row: {
+          account_number: string
+          bank_name: string
+          branch: string
+          charge_amount: string
+          charge_period: string
+          charge_title: string
+          id: string
+          ifsc_code: string
+          is_published: boolean
+          payment_mode_note: string
+          support_name: string
+          support_phones: string
+          updated_at: string
+        }
+        Insert: {
+          account_number: string
+          bank_name: string
+          branch: string
+          charge_amount: string
+          charge_period: string
+          charge_title: string
+          id?: string
+          ifsc_code: string
+          is_published?: boolean
+          payment_mode_note: string
+          support_name: string
+          support_phones: string
+          updated_at?: string
+        }
+        Update: {
+          account_number?: string
+          bank_name?: string
+          branch?: string
+          charge_amount?: string
+          charge_period?: string
+          charge_title?: string
+          id?: string
+          ifsc_code?: string
+          is_published?: boolean
+          payment_mode_note?: string
+          support_name?: string
+          support_phones?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          contact_phone: string
+          extra_email: string | null
+          footer_text: string
+          id: string
+          is_published: boolean
+          logo_url: string | null
+          updated_at: string
+          whatsapp_number: string | null
+        }
+        Insert: {
+          contact_phone: string
+          extra_email?: string | null
+          footer_text: string
+          id?: string
+          is_published?: boolean
+          logo_url?: string | null
+          updated_at?: string
+          whatsapp_number?: string | null
+        }
+        Update: {
+          contact_phone?: string
+          extra_email?: string | null
+          footer_text?: string
+          id?: string
+          is_published?: boolean
+          logo_url?: string | null
+          updated_at?: string
+          whatsapp_number?: string | null
         }
         Relationships: []
       }
