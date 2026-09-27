@@ -13,19 +13,12 @@ import {
 } from "lucide-react";
 import { Counter, Reveal } from "@/components/Reveal";
 import { SOCIETY, MANAGER } from "@/lib/society";
-import heroAsset from "@/assets/bldg-3.jpg.asset.json";
-import gal1 from "@/assets/bldg-1.jpg.asset.json";
-import gal2 from "@/assets/bldg-2.jpg.asset.json";
-import gal5 from "@/assets/bldg-5.webp.asset.json";
-import gal6 from "@/assets/bldg-6.jpg.asset.json";
-import gal7 from "@/assets/bldg-7.webp.asset.json";
-
 const GALLERY = [
-  { src: gal7.url, alt: "Trade Square glass facade seen from the entrance driveway, with the TRADE SQUARE signage above the lobby" },
-  { src: gal5.url, alt: "Trade Square compound entrance gate with the stone TRADE SQUARE name wall" },
-  { src: gal1.url, alt: "Upward view of the Trade Square glass facade and its curved metal cornice" },
-  { src: gal6.url, alt: "The main security gate at the Trade Square compound entrance" },
-  { src: gal2.url, alt: "Marble-clad lift lobby inside Trade Square with three elevators" },
+  { src: "/images/bldg-7.webp", alt: "Trade Square glass facade seen from the entrance driveway, with the TRADE SQUARE signage above the lobby" },
+  { src: "/images/bldg-5.webp", alt: "Trade Square compound entrance gate with the stone TRADE SQUARE name wall" },
+  { src: "/images/bldg-1.jpg", alt: "Upward view of the Trade Square glass facade and its curved metal cornice" },
+  { src: "/images/bldg-6.jpg", alt: "The main security gate at the Trade Square compound entrance" },
+  { src: "/images/bldg-2.jpg", alt: "Marble-clad lift lobby inside Trade Square with three elevators" },
 ];
 
 
@@ -73,7 +66,7 @@ function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden pb-24 pt-40 sm:pt-52">
         <img
-          src={heroAsset.url}
+          src="/images/bldg-3.jpg"
           alt="Exterior of Trade Square, the glass-facade commercial building at Saki Naka, Mumbai, with its TRADE SQUARE entrance signage"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
