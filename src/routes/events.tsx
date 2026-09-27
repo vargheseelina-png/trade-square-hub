@@ -4,14 +4,6 @@ import { CalendarDays, Users, GraduationCap, MapPin, Clock, X, ChevronLeft, Chev
 import { useQuery } from "@tanstack/react-query";
 import { Reveal } from "@/components/Reveal";
 import { supabase } from "@/integrations/supabase/client";
-import a01 from "@/assets/agm-01.jpeg.asset.json";
-import a02 from "@/assets/agm-02.jpeg.asset.json";
-import a03 from "@/assets/agm-03.jpeg.asset.json";
-import a04 from "@/assets/agm-04.jpeg.asset.json";
-import a05 from "@/assets/agm-05.jpeg.asset.json";
-import a06 from "@/assets/agm-06.jpeg.asset.json";
-import a07 from "@/assets/agm-07.jpeg.asset.json";
-import a08 from "@/assets/agm-08.jpeg.asset.json";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -47,42 +39,42 @@ const CATEGORIES: { id: "all" | Category; label: string }[] = [
 
 const PHOTOS: { url: string; alt: string; cat: Category }[] = [
   {
-    url: a01.url,
+    url: "/images/agm-01.jpeg",
     alt: "Committee members at the head table reviewing meeting papers during the Annual General Body Meeting",
     cat: "proceedings",
   },
   {
-    url: a02.url,
+    url: "/images/agm-02.jpeg",
     alt: "Members seated in the hall listening to the Annual General Body Meeting proceedings",
     cat: "hall",
   },
   {
-    url: a03.url,
+    url: "/images/agm-03.jpeg",
     alt: "Committee members at the head table beside the AGM banner showing the Occupancy Certificate announcement",
     cat: "milestone",
   },
   {
-    url: a04.url,
+    url: "/images/agm-04.jpeg",
     alt: "Members attending the Annual General Body Meeting, seated with meeting agenda papers",
     cat: "hall",
   },
   {
-    url: a05.url,
+    url: "/images/agm-05.jpeg",
     alt: "Committee members addressing and greeting attendees in front of the Trade Square AGM banner",
     cat: "addressing",
   },
   {
-    url: a06.url,
+    url: "/images/agm-06.jpeg",
     alt: "A member standing to speak among attendees during the Annual General Body Meeting",
     cat: "addressing",
   },
   {
-    url: a07.url,
+    url: "/images/agm-07.jpeg",
     alt: "Row of members attentively following the Annual General Body Meeting discussion",
     cat: "hall",
   },
   {
-    url: a08.url,
+    url: "/images/agm-08.jpeg",
     alt: "Wide view of the meeting hall at Suncity Hotel with members seated for the AGM",
     cat: "hall",
   },

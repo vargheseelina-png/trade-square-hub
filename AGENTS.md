@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Asset hosting
+
+- Keep user-facing image binaries in `public/images` and reference them with root-relative `/images/...` paths so deployments outside Lovable remain self-contained.
